@@ -1,0 +1,96 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, rgba(254, 172, 94, 0.4), rgba(199, 121, 208, 0.4), rgba(75, 192, 200, 0.4));
+}
+
+.body {
+    position: relative;
+    width: 1200px;
+    height: 650px;
+    margin: 50px 200px;
+    background: rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-image: url(./image/test.png);
+    background-size: 1200px 650px;
+}
+
+.left {
+    width: 520px;
+    height: 646px;
+    margin-left: 20px;
+    position: relative;
+    position: absolute;
+    display: inline-block;
+}
+
+
+.left img {
+    width: 520px;
+    height: 550px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.right {
+    position: absolute;
+    display: inline-block;
+    width: 680px;
+    height: 646px;
+    left: 526px;
+    margin: 3px 3px;
+    top: 40px;
+}
+
+.login_box {
+    position: relative;
+    width: 600px;
+    margin-left: 60px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+.login_box input {
+    border-color: rgba(200, 200, 200, 1);
+    border-radius: 5px;
+    width: 500px;
+    padding: 7px 0;
+    margin-bottom: 12px;
+    color: black;
+    font-size: 14px;
+    text-indent: 10px;
+}
+
+button {
+    position: relative;
+    margin-left: 80px;
+    top: 15px;
+    font-size: 18px;
+    color: white;
+    background-color: rgba(199, 201, 246, 1);
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+.start {
+    padding: 10px 70px;
+}
+
+.reflect {
+    padding: 10px 62px
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="./register.css">
+    <link rel="stylesheet" href="./sweetalert.css">
+    <script src="./sweetalert-dev.js"></script>
+</head>
+
+<body>
+    <div class="body">
+        <div class="left">
+            <img src="./image/register.jpg" alt="">
+        </div>
+        <div class="right">
+            <h2>Welcome to Oracle Assessment System</h2>
+            <div class="login_box">
+                <input type="text" name='name' id='name' required />
+                <label for="name">Name</label>
+            </div>
+            <div class="login_box">
+                <input type="text" name='email' id='email' required />
+                <label for="email">Email</label>
+            </div>
+            <div class="login_box">
+                <input type="password" name='pwd' id='pwd' required="required">
+                <label for="pwd">Password</label>
+            </div>
+            <a href="./login.html">
+                Sign up
+            </a>
+        </div>
+    </div>
+
+    <script src="jquery.min.js"></script>
+    <script>
+
+        $("input").not("#name").focus(function () {
+            $(this).css("color", "rgb(0,0,0)")
+        })
+        $("input").not("#name").blur(function () {
+            $(this).css("color", "rgba(0,0,0,0.6)")
+        })
+
+        $('a').click(function (e) {
+            event.preventDefault();  // 阻止表单默认提交行为
+
+            let name = $('#name').val().trim()
+            let email = $('#email').val().trim()
+            let password = $('#pwd').val().trim()
+
+            if (email.length <= 0 || password.length <= 0 || name.length <= 0) {
+                // return alert('Please fill in the complete information')
+                return swal("Please fill in the complete information")
+            }
+            // 获取表单数据
+            let formData = {
+                name: name,
+                email: email,
+                password: password
+            };
+
+
+
+            // 发送 Ajax 请求
+            $.ajax({
+                url: 'http://8.140.31.155:8080/users/register',  // 后端接口地址
+                type: 'POST',  // 请求方式
+                data: JSON.stringify(formData),
+                dataType: 'json',  // 发送的数据
+                success: function (data) {
+                    // 请求成功后的处理
+                    // alert('Successful registration');
+                    swal("Successful registration")
+                    let str_jsonData = JSON.stringify(data.data)
+                    localStorage.setItem('localData', str_jsonData)
+
+                    setTimeout(function(){
+                    $(location).attr("href", "./login.html")// http://8.140.31.155:8080/users/register
+
+                    },1500)
+                    console.log(str_jsonData);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    // 请求失败后的处理
+                    // alert('This email has been registered');
+                    swal("This email has been registered")
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

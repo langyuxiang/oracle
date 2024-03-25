@@ -1,0 +1,114 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, rgba(254, 172, 94, 0.4), rgba(199, 121, 208, 0.4), rgba(75, 192, 200, 0.4));
+}
+
+.body {
+    position: relative;
+    width: 1200px;
+    height: 650px;
+    margin: 50px 200px;
+    background: rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-image: url(./image/work.png);
+    background-size: 1200px 650px;
+}
+
+.left {
+    width: 520px;
+    height: 646px;
+    margin-left: 20px;
+    position: relative;
+    position: absolute;
+    display: inline-block;
+}
+
+
+.left img {
+    width: 520px;
+    height: 550px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.right {
+    position: absolute;
+    display: inline-block;
+    width: 680px;
+    height: 646px;
+    left: 526px;
+    margin: 3px 3px;
+    top: 52px;
+}
+
+h2 {
+    position: absolute;
+    font-size: 40px;
+    color: rgb(97, 99, 160);
+    z-index: 0;
+    text-shadow: 2px 2px 2px rgb(97, 99, 160);
+}
+
+.wel {
+    margin: 55px 60px 40px;
+}
+
+.orc {
+    margin: 120px 60px 80px;
+}
+
+.box {
+    margin-top: 220px;
+}
+
+.login_box {
+    position: relative;
+    width: 600px;
+    margin-left: 60px;
+    margin-top: 100px;
+}
+
+p {
+     padding-top: 10px;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.login_box input {
+    border-color: rgba(200, 200, 200, 1);
+    border-radius: 5px;
+    width: 500px;
+    padding: 9px 0;
+    margin-bottom: 40px;
+    color: black;
+    font-size: 16px;
+    text-indent: 10px;
+    padding-top: 10px;
+}
+
+.right a {
+    position: relative;
+    padding: 10px 222.3px;
+    margin-left: 60px;
+    top: 25px;
+    color: white;
+    background-color: rgba(81, 105, 238, 0.5);
+    border-radius: 5px;
+    text-decoration: none;
+    /*同样加个过渡*/
+    transition: all 0.5s;
+}
+
+.right a:hover {
+    color: #fff;
+    border-radius: 5px;
+    background-color: rgb(81, 105, 238);
+}

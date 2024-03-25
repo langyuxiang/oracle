@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+    <link rel="stylesheet" href="./upload.css">
+    <link rel="stylesheet" href="./sweetalert.css">
+    <script src="./sweetalert-dev.js"></script>
+</head>
+
+<body>
+    <div class="body">
+        <div class="left">
+            <img src="./image/tel.jpg" alt="">
+        </div>
+        <div class="right">
+            <div class="login_box">
+                <p>数据源ID</p>
+                <input type="text" name='source' id='source' required />
+            </div>
+            <div class="login_box">
+                <p>数据重要性</p>
+                <input type="text" name='importance' id='importance' required />
+            </div>
+            <div class="login_box">
+                <p>节点故障率</p>
+                <input type="text" name='failure_rate' id='failure_rate' required />
+            </div>
+            <div class="login_box">
+                <p>来源渠道</p>
+                <input type="text" name='source_channel' id='source_channel' required />
+            </div>
+            <div class="login_box">
+                <p>完整性</p>
+                <input type="text" name='integrity' id='integrity' required />
+            </div>
+            <div class="login_box">
+                <p>使用率</p>
+                <input type="text" name='usage_rate' id='usage_rate' required />
+            </div>
+            <div class="login_box">
+                <p>是否可信</p>
+                <input type="text" name='believe_or_not' id='believe_or_not' required />
+            </div>
+            <a>Upload</a>
+
+
+        </div>
+
+        <script src="./jquery.min.js"></script>
+        <script>
+            $("input").focus(function () {
+                $(this).css("color", "rgb(0,0,0)")
+            })
+            $("input").blur(function () {
+                $(this).css("color", "rgba(0,0,0,0.6)")
+            })
+
+
+            $("a").click(function () {
+
+                let source = $('#source').val().trim()
+                let importance = $("#importance").val().trim()
+                let failure_rate = $("#failure_rate").val().trim()
+                let source_channel = $("#source_channel").val().trim()
+                let integrity = $("#integrity").val().trim()
+                let usage_rate = $("#usage_rate").val().trim()
+                let believe_or_not = $("#believe_or_not").val().trim()
+
+                if (source.length <= 0 || importance.length <= 0 || failure_rate.length <= 0 || source_channel.length <= 0 || integrity.length <= 0 || usage_rate.length <= 0 || source.length <= 0 || believe_or_not.length <= 0) {
+                    // alert('Please fill in the complete information')
+                    swal("Please fill in the complete information")
+                } else {
+                    let formData = {
+                        node_id: parseInt(source),
+                        data_importance: parseFloat(importance),
+                        node_failure_rate: parseFloat(failure_rate),
+                        source: parseFloat(source_channel),
+                        integrity: parseFloat(integrity),
+                        utilization: parseFloat(usage_rate),
+                        result: parseInt(believe_or_not)
+                    }
+              
+                    $.ajax({
+                        url: 'http://8.140.31.155:8080/data/gradeData',  // 后端接口地址
+                        type: 'POST',  // 请求方式
+                        data: JSON.stringify(formData),  // 发送的数据
+                        headers: {
+                            "token": localStorage.getItem("localData").replace(/\"/g, ""),
+                            "Access-Control-Allow-Origin": "http://8.140.31.155:8080",
+                            "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE,OPTION"
+                        },
+                        
+                        success: function (data) {
+                            // console.log(data);
+                            setTimeout(function(){
+                            swal("Evaluate node success", "", "success")
+                            },1000)
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            // 请求失败后的处理
+                            console.log(textStatus);
+                        }
+                    });
+                }
+            })
+
+
+        </script>
+</body>
+
+</html>

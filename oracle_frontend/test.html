@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text</title>
+    <link rel="stylesheet" href="./test.css">
+    <link rel="stylesheet" href="./sweetalert.css">
+    <script src="./sweetalert-dev.js"></script>
+</head>
+
+<body>
+    <div class="body">
+        <div class="left">
+            <!-- <img src="./image/tel.jpg" alt=""> -->
+        </div>
+        <div class="right">
+            <div class="login_box">
+                <p>数据源ID</p>
+                <input type="text" name='source' id='source' required />
+            </div>
+            <div class="login_box">
+                <p>数据重要性</p>
+                <input type="text" name='importance' id='importance' required />
+            </div>
+            <div class="login_box">
+                <p>节点故障率</p>
+                <input type="text" name='failure_rate' id='failure_rate' required />
+            </div>
+            <div class="login_box">
+                <p>来源渠道</p>
+                <input type="text" name='source_channel' id='source_channel' required />
+            </div>
+            <div class="login_box">
+                <p>完整性</p>
+                <input type="text" name='integrity' id='integrity' required />
+            </div>
+            <div class="login_box">
+                <p>使用率</p>
+                <input type="text" name='usage_rate' id='usage_rate' required />
+            </div>
+            <div class="login_box">
+                <p>是否可信</p>
+                <input type="text" name='believe_or_not' id='believe_or_not' required />
+            </div>
+            <button class="start">Start</button>
+            <button class="reflect">Reflect</button>
+        </div>
+
+        <script src="./jquery.min.js"></script>
+        <script>
+            let temp = true
+            //读取本地的字符串数据
+            let getData_message = localStorage.getItem('Data');
+            //将字符串类转换为json格式对象
+            let jsonObj = JSON.parse(getData_message);
+            $("#source").val(jsonObj.data.ID)
+            $("#importance").val(jsonObj.data.data_importance)
+            $("#failure_rate").val(jsonObj.data.node_failure_rate)
+            $("#source_channel").val(jsonObj.data.source_channel)
+            $("#integrity").val(jsonObj.data.integrity)
+            $("#usage_rate").val(jsonObj.data.usage_rate)
+            $("#believe_or_not").val(jsonObj.data.is_believable)
+
+            let source = parseInt($('#source').val().trim())
+            let formData = {
+                data_source_id: +source
+            }
+
+        
+            $(".start").click(function () {
+                // if ($(".start").text() == "Start"){
+                //     temp = true
+                // }else {
+                //     temp = false
+                // }
+
+                if (temp) {
+                    $.ajax({
+                        url: 'http://8.140.31.155:8080/data/getStartTime',  // 后端接口地址
+                        type: 'POST',  // 请求方式
+                        data: "",  // 发送的数据
+                        headers: {
+                            token: localStorage.getItem("localData").replace(/\"/g, ""),
+                            "Access-Control-Allow-Origin": "http://8.140.31.155:8080",
+                            "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE,OPTION"
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            temp = false;
+                            $(".start").text("End").css("padding","10px 73px")
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            // 请求失败后的处理
+                            console.log("error");
+                        }
+                    });
+
+                }
+                 else {
+                    
+                    $.ajax({
+                        url: 'http://8.140.31.155:8080/data/useData',  // 后端接口地址
+                        type: 'POST',  // 请求方式
+                        data: JSON.stringify(formData),  // 发送的数据
+                        headers: {
+                            token: localStorage.getItem("localData").replace(/\"/g, ""),
+                            "Access-Control-Allow-Origin": "*",
+                            "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE,OPTION",
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            temp = true
+                            $(".start").text("Start")
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            // 请求失败后的处理
+                            console.log(textStatus);
+                        }
+                    });
+
+
+
+                
+                }
+            })
+            
+
+            $(".reflect").click(function () {
+                $.ajax({
+                    url: 'http://8.140.31.155:8080/data/feedBack',  // 后端接口地址
+                    type: 'POST',  // 请求方式
+                    data: JSON.stringify(formData),  // 发送的数据
+                    headers: {
+                        "token": localStorage.getItem("localData").replace(/\"/g, ""),
+                        "Access-Control-Allow-Origin": "http://8.140.31.155:8080",
+                        "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE,OPTION"
+                    },
+                    success: function (data) {
+                        // alert('Feedback successful')
+                        swal("Feedback successful")
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        // 请求失败后的处理
+                        console.log("error");
+                    }
+                });
+            })
+        </script>
+</body>
+
+</html>

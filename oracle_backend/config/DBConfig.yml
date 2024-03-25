@@ -1,0 +1,8 @@
+mysql:
+  host: 127.0.0.1:3306
+  username: root
+  password: HKismyson666
+  dbname: oracle
+  max_idle_conn: 25
+  max_open_conn: 25
+

@@ -1,0 +1,90 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* background: linear-gradient(to right, #a18cd1, #fbc2eb); */
+    background: linear-gradient(to right, rgba(254, 172, 94, 0.4), rgba(199, 121, 208, 0.4), rgba(75, 192, 200, 0.4));
+}
+
+.body {
+    position: relative;
+    width: 1200px;
+    height: 650px;
+    margin: 50px 200px;
+    background: rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.left {
+    width: 520px;
+    height: 646px;
+    margin-left: 20px;
+    position: relative;
+    position: absolute;
+    display: inline-block;
+    /* background-color: pink; */
+}
+
+
+.left img {
+    width: 520px;
+    height: 550px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.right {
+    position: absolute;
+    display: inline-block;
+    width: 680px;
+    height: 646px;
+    left: 526px;
+    margin: 3px 3px;
+    top: 40px;
+}
+
+.login_box {
+    position: relative;
+    width: 600px;
+    margin-left: 60px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+.login_box input {
+    border-color: rgba(200, 200, 200, 1);
+    border-radius: 5px;
+    width: 500px;
+    padding: 7px 0;
+    margin-bottom: 12px;
+    color: black;
+    font-size: 14px;
+    text-indent: 10px;
+}
+
+a {
+    position: relative;
+    padding: 7px 222px;
+    margin-left: 60px;
+    top: 15px;
+    color: white;
+    background-color: rgba(81, 105, 238, 0.5);
+    border-radius: 5px;
+    text-decoration: none;
+    /*同样加个过渡*/
+    transition: all 0.5s;
+}
+
+a:hover {
+
+    background-color: rgb(81, 105, 238);
+}

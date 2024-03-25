@@ -1,0 +1,116 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* background: linear-gradient(to right, #a18cd1, #fbc2eb); */
+    background: linear-gradient(to right, rgba(254, 172, 94, 0.4), rgba(199, 121, 208, 0.4), rgba(75, 192, 200, 0.4));
+}
+
+.body {
+    position: relative;
+    width: 1200px;
+    height: 650px;
+    margin: 50px 200px;
+    background: rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.left {
+    position: absolute;
+    display: inline-block;
+    height: 646px;
+    width: 520px;
+    margin: 3px 3px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+img {
+    height: 650px;
+}
+
+.right {
+    position: absolute;
+    display: inline-block;
+    width: 680px;
+    height: 646px;
+    left: 526px;
+    margin: 3px 3px;
+}
+
+h2 {
+    margin: 80px 60px 90px;
+    font-size: 28px;
+    color: rgb(81, 105, 238)
+}
+
+.login_box {
+    position: relative;
+    margin-left: 60px;
+    width: 500px;
+}
+
+.login_box #name {
+    border-color: rgba(230, 230, 230, 0.5);
+    border-radius: 5px;
+    width: 420px;
+    padding: 10px 0;
+    margin-bottom: 50px;
+    color: rgb(81, 105, 238);
+    font-size: 16px;
+}
+
+.login_box input {
+    border-color: rgba(230, 230, 230, 0.8);
+    border-radius: 5px;
+    width: 420px;
+    padding: 10px 0;
+    margin-bottom: 50px;
+    color: black;
+    font-size: 16px;
+    text-indent: 10px;
+}
+
+.login_box label {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    padding: 10px 0;
+    color: rgb(75, 76, 101);
+    /*这个属性的默认值是auto 默认是这个元素可以被点击 但是如果我们写了none 就是这个元素不能被点击*/
+    pointer-events: none;
+    /*加个过度*/
+    transition: all 0.5s;
+}
+
+.login_box input:focus+label,
+.login_box input:valid+label {
+
+    top: -45px;
+    left: 0px;
+    color: black;
+    font-size: 20px;
+}
+
+.right a {
+    position: relative;
+    padding: 10px 180.9px;
+    margin-left: 60px;
+    top: 10px;
+    color: white;
+    background-color: rgba(81, 105, 238, 0.5);
+    border-radius: 5px;
+    text-decoration: none;
+    /*同样加个过渡*/
+    transition: all 0.5s;
+}
+
+.right a:hover {
+    color: #fff;
+    border-radius: 5px;
+    background-color: rgb(81, 105, 238);
+}

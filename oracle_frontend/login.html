@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="./sweetalert.css">
+    <script src="./sweetalert-dev.js"></script>
+</head>
+
+<body>
+    <div class="body">
+        <div class="left">
+            <img src="./image/login.jpg" alt="">
+        </div>
+
+        <div class="right">
+            <a href="javascript:void(null)" class="language">语 言</a>
+            <ul>
+                <li class="english">English</li>
+                <li class="chinese">中文</li>
+            </ul>
+
+            <h2>Sign in the Oracle Assessment System</h2>
+            <p>Don't have an account?</p>
+            <a href="./register.html" class="up">
+                Sign up
+            </a>
+            <div class="login_box">
+                <input type="text" name='email' id='email' required />
+                <label for="name" class="name">Email</label>
+            </div>
+            <div class="login_box">
+                <input type="password" name='pwd' id='pwd' required="required">
+                <label for="pwd" class="pwd">Password</label>
+            </div>
+            <a href="#" class="in">
+                Sign in
+            </a>
+        </div>
+    </div>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        let temp = 0;
+        $(function () {
+            $(".language").hover(function () {
+                $(this).css("background-color", "rgba(0, 0, 0, 1)")
+            }, function () {
+                if (temp === 0) {
+                    $(this).css("background-color", "rgba(0, 0, 0, 0.8)")
+                }
+            })
+
+            $(".language").click(function () {
+                if (temp === 0) {
+                    temp = 1
+                    $("ul").slideDown(200)
+                    $(".language").css({
+                        "border-bottom-right-radius": "0px",
+                        "border-bottom-left-radius": "0px"
+                    })
+                } else {
+                    temp = 0
+                    $("ul").slideUp(200, function () {
+                        $(".language").css({
+                            "border-bottom-right-radius": "5px",
+                            "border-bottom-left-radius": "5px"
+                        })
+                    })
+                }
+            })
+
+            $("li").hover(function () {
+                $(this).css({
+                    "background-color": "rgb(150, 150, 190)",
+                })
+            }, function () {
+                $(this).css({
+                    "background-color": "rgba(0, 0, 0, 1)",
+                })
+            })
+
+            $("input").focus(function () {
+                $(this).css("color", "rgb(0,0,0)")
+            })
+            $("input").blur(function () {
+                $(this).css("color", "rgba(0,0,0,0.6)")
+            })
+
+            $('.in').click(function () {
+
+                event.preventDefault();  // 阻止表单默认提交行为
+
+                let email = $('#email').val().trim()
+                let password = $('#pwd').val().trim()
+                let text = $(".language").text()
+
+                if (email.length <= 0 || password.length <= 0) {
+                    // return alert('Please fill in the complete information')
+                    if (text == "Language") {
+                        // alert("登录成功")
+                    return swal("请输入完整的信息"); 
+                    } else {
+                        // alert("Login successful")
+                    return swal("Please fill in the complete information")
+                    }
+                }
+                // 获取表单数据
+                let formData = {
+                    email: email,
+                    password: password
+                };
+
+
+                // 发送 Ajax 请求
+                $.ajax({
+                    url: 'http://8.140.31.155:8080/users/login',  // 后端接口地址
+                    type: 'POST',  // 请求方式
+                    data: JSON.stringify(formData),  // 发送的数据
+                    success: function (data) {
+                        // 请求成功后的处理
+                        if (text == "Language") {
+                            // alert("登录成功")
+                            swal("登录成功","","success")
+                        } else {
+                            // alert("Login successful")
+                            swal("Login successful","","success")
+                        }
+                        // console.log(typeof (data));
+                        // console.log(data);
+                        let str_jsonData = JSON.stringify(data.data)
+                        localStorage.setItem('localData', str_jsonData)
+                        console.log(str_jsonData);
+                        console.log(typeof (str_jsonData));
+
+                        setTimeout(function(){
+                            $(location).attr("href", "./index.html")// http://8.140.31.155/home.html
+                        },1500)
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        // 请求失败后的处理
+                        // alert("Wrong email or password");
+                        swal("Wrong email or password")
+                    }
+                });
+            });
+        })
+
+        let english = document.querySelector(".english")
+        let chinese = document.querySelector(".chinese")
+        let title = document.querySelector("h2")
+        let p = document.querySelector("p")
+        let up = document.querySelector(".up")
+        let email = document.querySelector(".name")
+        let pwd = document.querySelector(".pwd")
+        let inn = document.querySelector(".in")
+        let language = document.querySelector(".language")
+        let ul = document.querySelector("ul")
+
+        english.addEventListener("click", function () {
+            title.innerHTML = `Sign in the Oracle Assessment System`
+            p.innerHTML = `Don't have an account?`
+            up.innerHTML = `Sign up`
+            email.innerHTML = `Email`
+            pwd.innerHTML = `Password`
+            inn.innerHTML = `Sign in`
+            language.innerHTML = `语 言`
+            ul.style.display = "none"
+            language.style.borderRadius = "5px"
+            temp = 0
+        })
+
+        chinese.addEventListener("click", function () {
+            title.innerHTML = `请 登 录 预 言 机 评 估 系 统`
+            p.innerHTML = `还没有账号？`
+            up.innerHTML = `注册`
+            email.innerHTML = `邮箱`
+            pwd.innerHTML = `密码`
+            inn.innerHTML = `登录`
+
+            language.innerHTML = `Language`
+            ul.style.display = "none"
+            language.style.borderRadius = "5px"
+            temp = 0
+        })
+    </script>
+</body>
+
+</html>

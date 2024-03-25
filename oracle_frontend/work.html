@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="icon" href="./favicon.ico">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work</title>
+    <link rel="stylesheet" href="./work.css">
+
+</head>
+
+<body>
+    <div class="body">
+        <div class="left">
+        </div>
+        <div class="right">
+            <h2 class="wel">Welcome to</h2>
+            <h2 class="orc">Oracle Assessment System</h2>
+            <div class="box">
+                <div class="login_box">
+                    <p>数据源ID</p>
+                    <input type="text" name='source' id='source' required />
+                </div>
+                
+            </div>
+
+            <a href="javascript:void(0);">
+                Upload
+            </a>
+
+        </div>
+    </div>
+
+    <script src="jquery.min.js"></script>
+    <script>
+        //读取本地的字符串数据
+        let getLocalData = localStorage.getItem('localData');
+        //显示类型 这个时候是字符串类型
+        console.log(typeof (getLocalData));
+        //将字符串类转换为json格式
+
+        $("input").focus(function () {
+            $(this).css("color", "rgb(0,0,0)")
+        })
+        $("input").blur(function () {
+            $(this).css("color", "rgba(0,0,0,0.6)")
+        })
+
+        $('a').click(function () {
+
+            event.preventDefault();  // 阻止表单默认提交行为
+
+            let source = parseInt($('#source').val().trim())
+            console.log(typeof (source));
+
+            if (source.length <= 0) {
+                return alert('请填写完整信息')
+            }
+
+            // 获取表单数据
+            let formData = {
+                data_source_id: source,
+            };
+
+            $.ajax({
+                url: 'http://8.140.31.155:8080/data/findDataById',  // 后端接口地址
+                type: 'POST',  // 请求方式
+                data: JSON.stringify(formData),  // 发送的数据
+                contentType: 'application/json; charset=utf-8',
+                headers: {
+                    token: localStorage.getItem("localData").replace(/\"/g, ""),
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE,OPTION"
+                },
+                //请求成功的回调函数
+                success: function (data) {
+                    $(location).attr("href", "./test.html")
+                    // 请求成功后的处理
+                    localStorage.setItem('Data', JSON.stringify(data))
+                    console.log(JSON.stringify(data));
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    // 请求失败后的处理
+                    console.log(textStatus);
+                }
+            });
+
+
+        });
+    </script>
+</body>
+
+</html>

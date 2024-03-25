@@ -1,0 +1,168 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* background-image: linear-gradient(to right, #9000ff, #5e00ff); */
+    background: linear-gradient(to right, rgba(254, 172, 94, 0.4), rgba(199, 121, 208, 0.4), rgba(75, 192, 200, 0.4));
+}
+
+.body {
+    position: relative;
+    width: 1200px;
+    height: 650px;
+    margin: 50px 200px;
+    background: rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.left {
+    position: absolute;
+    display: inline-block;
+    height: 646px;
+    width: 520px;
+    margin: 3px 3px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+img {
+    height: 650px;
+    width: 520px;
+}
+
+.right {
+    position: absolute;
+    display: inline-block;
+    width: 680px;
+    height: 646px;
+    left: 526px;
+    margin: 3px 3px;
+}
+
+.language {
+    display: block;
+    width: 120px;
+    height: 45px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    line-height: 45px;
+    margin: 55px 20px 0px 500px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+
+ul {
+    float: right;
+    width: 120px;
+    height: 90px;
+    background-color: white;
+    margin-right: 60px;
+    z-index: 10;
+    display: none;
+    cursor: pointer;
+    clear: both;
+}
+
+ul li {
+    color: white;
+    float: right;
+    width: 120px;
+    height: 45px;
+    background-color: black;
+    line-height: 45px;
+    text-align: center;
+    clear: both;
+}
+
+h2 {
+    position: absolute;
+    margin: 25px 60px 40px;
+    font-size: 28px;
+    color: black;
+    z-index: 0;
+}
+
+ul li:nth-child(2) {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+p {
+    display: inline-block;
+    margin: 90px 20px 70px 60px;
+    color: rgb(145, 145, 145);
+}
+
+.up {
+    position: relative;
+    color: black;
+    font-weight: 600;
+    text-decoration: none;
+    /*同样加个过渡*/
+    transition: all 0.5s;
+}
+
+.login_box {
+    position: relative;
+    margin-left: 60px;
+    width: 500px;
+}
+
+.login_box input {
+    border-color: rgba(230, 230, 230, 0.8);
+    border-radius: 5px;
+    width: 420px;
+    padding: 10px 0;
+    margin-bottom: 60px;
+    font-size: 16px;
+    text-indent: 10px;
+}
+
+.login_box label {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    padding: 10px 0;
+    color: rgb(75, 76, 101);
+    /*这个属性的默认值是auto 默认是这个元素可以被点击 但是如果我们写了none 就是这个元素不能被点击*/
+    pointer-events: none;
+    /*加个过度*/
+    transition: all 0.5s;
+}
+
+.login_box input:focus+label,
+.login_box input:valid+label {
+
+    top: -45px;
+    left: 0px;
+    color: black;
+    font-size: 20px;
+}
+
+.in {
+    display: inline-block;
+    position: relative;
+    width: 420px;
+    height: 41.69px;
+    text-align: center;
+    line-height: 41.69px;
+    margin-left: 60px;
+    top: 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    text-decoration: none;
+    /*同样加个过渡*/
+    transition: all 0.5s;
+}
+
+.right .in:hover {
+    color: #fff;
+    border-radius: 5px;
+    background-color: rgb(0, 0, 0);
+}
